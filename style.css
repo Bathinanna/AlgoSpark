@@ -38,13 +38,14 @@ body {
 /* Title CSS */
 .title {
   background-color: var(--primary-color);
-  font-size: 2em; /* Increased font size for prominence */
+  font-size: 2.2em; /* Increased font size for prominence */
   padding: 1em;
   color: var(--accent-color);
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Navbar CSS */
@@ -94,12 +95,13 @@ body {
 .platform:hover::after {
   content: '';
   position: absolute;
-  bottom: -5px; /* Positioning the hover bar */
+  bottom: -5px;
   left: 0;
   right: 0;
   height: 4px; /* Height of the bar */
   background-color: var(--accent-color); /* Color of the bar */
   border-radius: 2px;
+  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Questions Section */
@@ -118,6 +120,23 @@ body {
 
 .questions li {
   margin: 5px 0;
+}
+
+/* Enhanced Questions List */
+.questions-list {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.questions-list p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 10px 0;
 }
 
 /* Center and Array CSS */
@@ -182,6 +201,63 @@ body {
   border-color: var(--accent-color); /* Highlight border on focus */
 }
 
+/* Improved Input Field */
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  color: #333333;
+  background-color: #f5f5f5;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  display: block;
+}
+
+/* Individual Buttons */
+.button {
+  width: 80%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.leetcode-button {
+  background-color: #FFA116;
+}
+
+.leetcode-button:hover {
+  background-color: #e6950d;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(255, 161, 22, 0.3);
+}
+
+.hackerrank-button {
+  background-color: #2EC866;
+}
+
+.hackerrank-button:hover {
+  background-color: #28b35a;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(46, 200, 102, 0.3);
+}
+
+.geeksforgeeks-button {
+  background-color: #00818a;
+}
+
+.geeksforgeeks-button:hover {
+  background-color: #006b6f;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 129, 138, 0.3);
+}
+
 /* Footer CSS */
 footer {
   font-size: 18px;
@@ -206,50 +282,84 @@ footer {
 }
 
 .social-media {
+  display:
+.social-media {
   display: flex;
-  gap: 1em;
+  gap: 10px;
 }
 
-.footerr .social-media a {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 0.2rem solid var(--highlight-color);
-  border-radius: 50%;
-  font-size: 1.4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--highlight-color);
-  background-color: var(--secondary-color);
-  transition: background-color 0.3s, color 0.3s;
+.social-media a {
+  color: var(--text-color);
+  font-size: 1.5rem; /* Icon size */
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-media a:hover {
-  background-color: var(--highlight-color);
-  color: white;
+  color: var(--highlight-color); /* Highlight color on hover */
+  transform: scale(1.1); /* Slightly increase icon size on hover */
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 600px) {
+/* Footer Links */
+.footer-links {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: var(--text-color);
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
   .title {
-    font-size: 1.5em; /* Slightly smaller on mobile */
+    font-size: 1.8em;
   }
+
   .navbar a {
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 1em;
+  }
+
+  .inputBox {
+    width: 60vw;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .center {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5em;
+  }
+
+  .navbar {
+    font-size: 0.9em;
+  }
+
+  .navbar a {
     padding: 6px 10px;
   }
-  footer {
-    font-size: 16px;
-  }
-  .footerr .social-media a {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.2rem;
-  }
-}
 
-@media screen and (max-width: 550px) {
-  .center {
-    width: 95%; /* Full width on smaller screens */
+  .inputBox {
+    width: 80vw;
+  }
+
+  .questions-list p {
+    font-size: 0.9rem;
   }
 }
