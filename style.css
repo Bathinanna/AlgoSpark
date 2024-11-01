@@ -101,7 +101,6 @@ body {
   height: 4px; /* Height of the bar */
   background-color: var(--accent-color); /* Color of the bar */
   border-radius: 2px;
-  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Questions Section */
@@ -281,8 +280,6 @@ footer {
   font-size: 1rem;
 }
 
-.social-media {
-  display:
 .social-media {
   display: flex;
   gap: 10px;
