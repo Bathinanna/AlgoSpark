@@ -1,186 +1,178 @@
 "use strict";
-
-class SortingVisualizer {
+class sortAlgorithms {
     constructor(time) {
         this.list = document.querySelectorAll(".cell");
         this.size = this.list.length;
         this.time = time;
         this.help = new Helper(this.time, this.list);
-        this.originalValues = Array.from(this.list).map(cell => ({
-            value: Number(cell.getAttribute("value")),
-            cell: cell
-        }));
-    }
-
-    resetList() {
-        this.list.forEach((cell, index) => {
-            cell.setAttribute("value", this.originalValues[index].value);
-            cell.style.height = `${3.5 * this.originalValues[index].value}px`;
-            cell.setAttribute("class", "cell");
-        });
-    }
-
-    async markCells(indices) {
-        for (let index of indices) {
-            await this.help.mark(index);
-        }
-        await this.help.pause(); // Optional pause after marking
-        for (let index of indices) {
-            await this.help.unmark(index);
-        }
     }
 
     // BUBBLE SORT
-    async BubbleSort() {
+    BubbleSort = async () => {
         for (let i = 0; i < this.size - 1; ++i) {
             for (let j = 0; j < this.size - i - 1; ++j) {
-                await this.markCells([j, j + 1]);
+                await this.help.mark(j);
+                await this.help.mark(j + 1);
                 if (await this.help.compare(j, j + 1)) {
                     await this.help.swap(j, j + 1);
                 }
-                await this.markCells([j, j + 1]);
+                await this.help.unmark(j);
+                await this.help.unmark(j + 1);
             }
             this.list[this.size - i - 1].setAttribute("class", "cell done");
         }
         this.list[0].setAttribute("class", "cell done");
-        this.displayComplexity("O(n^2)");
+        
+        document.getElementById('time').innerHTML = "O(n^2)";
+        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
+        // document.querySelector("footer").style.visibility = "visible";
     }
 
     // INSERTION SORT
-    async InsertionSort() {
-        for (let i = 1; i < this.size; ++i) {
+    InsertionSort = async () => {
+        for (let i = 0; i < this.size - 1; ++i) {
             let j = i;
-            while (j > 0 && await this.help.compare(j, j - 1)) {
-                await this.markCells([j, j - 1]);
-                await this.help.swap(j, j - 1);
-                await this.markCells([j, j - 1]);
+            while (j >= 0 && await this.help.compare(j, j + 1)) {
+                await this.help.mark(j);
+                await this.help.mark(j + 1);
+                await this.help.pause();
+                await this.help.swap(j, j + 1);
+                await this.help.unmark(j);
+                await this.help.unmark(j + 1);
                 j -= 1;
             }
         }
-        this.finalizeSort();
+        for (let counter = 0; counter < this.size; ++counter) {
+            this.list[counter].setAttribute("class", "cell done");
+        }
+        document.getElementById('time').innerHTML = "O(n^2)";
+        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
+        // document.querySelector("footer").style.visibility = "visible";
     }
 
     // SELECTION SORT
-    async SelectionSort() {
+    SelectionSort = async () => {
         for (let i = 0; i < this.size; ++i) {
             let minIndex = i;
-            for (let j = i + 1; j < this.size; ++j) {
-                await this.markCells([minIndex, j]);
+            for (let j = i; j < this.size; ++j) {
+                await this.help.markSpl(minIndex);
+                await this.help.mark(j);
                 if (await this.help.compare(minIndex, j)) {
                     await this.help.unmark(minIndex);
                     minIndex = j;
                 }
-                await this.markCells([j]);
+                await this.help.unmark(j);
+                await this.help.markSpl(minIndex);
             }
-            await this.markCells([minIndex, i]);
+            await this.help.mark(minIndex);
+            await this.help.mark(i);
+            await this.help.pause();
             await this.help.swap(minIndex, i);
+            await this.help.unmark(minIndex);
             this.list[i].setAttribute("class", "cell done");
         }
-        this.finalizeSort();
+        document.getElementById('time').innerHTML = "O(n^2)";
+        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
+        // document.querySelector("footer").style.visibility = "visible";
     }
 
     // MERGE SORT
-    async MergeSort() {
+    MergeSort = async () => {
         await this.MergeDivider(0, this.size - 1);
-        this.finalizeSort();
+        for (let counter = 0; counter < this.size; ++counter) {
+            this.list[counter].setAttribute("class", "cell done");
+        }
+        document.getElementById('time').innerHTML = "O(nlog(n))";
+        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
+        // document.querySelector("footer").style.visibility = "visible";
     }
 
-    async MergeDivider(start, end) {
+    MergeDivider = async (start, end) => {
         if (start < end) {
-            let mid = Math.floor((start + end) / 2);
+            let mid = start + Math.floor((end - start) / 2);
             await this.MergeDivider(start, mid);
             await this.MergeDivider(mid + 1, end);
             await this.Merge(start, mid, end);
         }
     }
 
-    async Merge(start, mid, end) {
-        let newList = [];
-        let leftIndex = start;
-        let rightIndex = mid + 1;
+    Merge = async (start, mid, end) => {
+        let newList = new Array();
+        let frontcounter = start;
+        let midcounter = mid + 1;
 
-        while (leftIndex <= mid && rightIndex <= end) {
-            let leftValue = Number(this.list[leftIndex].getAttribute("value"));
-            let rightValue = Number(this.list[rightIndex].getAttribute("value"));
-            if (leftValue <= rightValue) {
-                newList.push(leftValue);
-                leftIndex++;
-            } else {
-                newList.push(rightValue);
-                rightIndex++;
+        while (frontcounter <= mid && midcounter <= end) {
+            let fvalue = Number(this.list[frontcounter].getAttribute("value"));
+            let svalue = Number(this.list[midcounter].getAttribute("value"));
+            if (fvalue >= svalue) {
+                newList.push(svalue);
+                ++midcounter;
+            }
+            else {
+                newList.push(fvalue);
+                ++frontcounter;
             }
         }
-
-        while (leftIndex <= mid) {
-            newList.push(Number(this.list[leftIndex].getAttribute("value")));
-            leftIndex++;
+        while (frontcounter <= mid) {
+            newList.push(Number(this.list[frontcounter].getAttribute("value")));
+            ++frontcounter;
         }
-        while (rightIndex <= end) {
-            newList.push(Number(this.list[rightIndex].getAttribute("value")));
-            rightIndex++;
+        while (midcounter <= end) {
+            newList.push(Number(this.list[midcounter].getAttribute("value")));
+            ++midcounter;
         }
 
         for (let c = start; c <= end; ++c) {
             this.list[c].setAttribute("class", "cell current");
         }
-
-        for (let c = start; c <= end; ++c) {
+        for (let c = start, point = 0; c <= end && point < newList.length;
+            ++c, ++point) {
             await this.help.pause();
-            this.list[c].setAttribute("value", newList[c - start]);
-            this.list[c].style.height = `${3.5 * newList[c - start]}px`;
+            this.list[c].setAttribute("value", newList[point]);
+            this.list[c].style.height = `${3.5 * newList[point]}px`;
         }
-
         for (let c = start; c <= end; ++c) {
             this.list[c].setAttribute("class", "cell");
         }
     }
 
     // QUICK SORT
-    async QuickSort() {
+    QuickSort = async () => {
         await this.QuickDivider(0, this.size - 1);
-        this.finalizeSort();
+        for (let c = 0; c < this.size; ++c) {
+            this.list[c].setAttribute("class", "cell done");
+        }
+        document.getElementById('time').innerHTML = "O(nlog(n))";
+        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
+        // document.querySelector("footer").style.visibility = "visible";
     }
 
-    async QuickDivider(start, end) {
+    QuickDivider = async (start, end) => {
         if (start < end) {
-            let pivotIndex = await this.Partition(start, end);
-            await this.QuickDivider(start, pivotIndex - 1);
-            await this.QuickDivider(pivotIndex + 1, end);
+            let pivot = await this.Partition(start, end);
+            await this.QuickDivider(start, pivot - 1);
+            await this.QuickDivider(pivot + 1, end);
         }
     }
 
-    async Partition(start, end) {
-        let pivot = Number(this.list[end].getAttribute("value"));
-        let partitionIndex = start;
+    Partition = async (start, end) => {
+        let pivot = this.list[end].getAttribute("value");
+        let prev_index = start - 1;
 
         await this.help.markSpl(end);
         for (let c = start; c < end; ++c) {
-            await this.help.mark(c);
             let currValue = Number(this.list[c].getAttribute("value"));
+            await this.help.mark(c);
             if (currValue < pivot) {
-                await this.help.swap(c, partitionIndex);
-                partitionIndex++;
+                prev_index += 1;
+                await this.help.mark(prev_index);
+                await this.help.swap(c, prev_index);
+                await this.help.unmark(prev_index);
             }
             await this.help.unmark(c);
         }
-        await this.help.swap(partitionIndex, end);
+        await this.help.swap(prev_index + 1, end);
         await this.help.unmark(end);
-        return partitionIndex;
+        return prev_index + 1;
     }
-
-    finalizeSort() {
-        for (let counter = 0; counter < this.size; ++counter) {
-            this.list[counter].setAttribute("class", "cell done");
-        }
-        this.displayComplexity("O(n^2) or O(nlog(n)) depending on the sort");
-    }
-
-    displayComplexity(complexity) {
-        document.getElementById('time').innerHTML = complexity;
-        document.querySelector(".footer > p:nth-child(1)").style.visibility = "visible";
-    }
-
-    setSpeed(speed) {
-        this.help.setDelay(speed);
-    }
-}
+};
