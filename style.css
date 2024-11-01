@@ -9,6 +9,9 @@
   --text-color: #f0f0f0; /* Default text color */
   --border-color: #444; /* Border color for inputs */
   --cell-hover-color: #ffe0b2; /* Light color for cell hover effect */
+  --light-gray: #f0f0f0; /* Light gray background for body */
+  --footer-bg: #3b5998; /* Facebook Blue */
+  --nav-bg: #8b9dc3; /* Light blue for navbar */
 }
 
 /* Reset and Global Styles */
@@ -19,7 +22,6 @@
   font-family: 'Poppins', sans-serif;
   user-select: none;
   scroll-behavior: smooth;
-  text-decoration: none;
 }
 
 body {
@@ -27,10 +29,9 @@ body {
   min-height: 100vh;
   text-align: center;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   align-items: stretch;
-  background: linear-gradient(135deg, var(--primary-color) 30%, var(--secondary-color) 100%);
+  background: linear-gradient(135deg, var(--light-gray) 30%, var(--secondary-color) 100%);
   color: var(--text-color);
 }
 
@@ -56,17 +57,16 @@ body {
   font-size: 1.2em; /* Adjusted for better readability */
   min-height: 70px;
   padding: 1em;
-  background-color: var(--secondary-color);
-  transition: all 0.5s ease;
+  background-color: var(--nav-bg);
   border-radius: 8px; /* Added border radius for smoothness */
 }
 
 .navbar a {
-  color: var(--text-color);
+  color: #fff; /* White text for links */
   font-weight: bold;
   padding: 10px 15px; /* Slightly larger padding */
   border-radius: 8px;
-  transition: 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
   background-color: var(--accent-color);
 }
 
@@ -100,8 +100,7 @@ body {
 .cell {
   display: flex;
   align-items: flex-end;
-  flex: 0.5; /* Flex-grow property for responsive sizing */
-  width: 0.000001%; /* Allows flexible resizing */
+  flex: 1; /* Flex-grow property for responsive sizing */
   margin: 1px;
   background-color: var(--cell-background);
   transition: transform 0.3s ease-in-out, background-color 0.4s ease-in-out;
@@ -143,8 +142,8 @@ body {
 footer {
   font-size: 18px;
   padding: 1em;
-  color: var(--text-color);
-  background-color: var(--secondary-color);
+  color: #fff;
+  background-color: var(--footer-bg);
   text-align: center;
   font-weight: 700;
   box-shadow: rgba(0, 0, 0, 0.2) 0px -4px 12px; /* Shadow for depth */
