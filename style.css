@@ -76,6 +76,50 @@ body {
   transform: translateY(-2px);
 }
 
+/* Platform Styles */
+.platform {
+  background-color: #e7f3ff; /* Light blue background */
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  position: relative; /* Position for the hover bar */
+}
+
+.platform:hover {
+  background-color: #d1e8ff; /* Darker blue on hover */
+  transform: translateY(-2px);
+}
+
+.platform:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Positioning the hover bar */
+  left: 0;
+  right: 0;
+  height: 4px; /* Height of the bar */
+  background-color: var(--accent-color); /* Color of the bar */
+  border-radius: 2px;
+}
+
+/* Questions Section */
+.questions {
+  margin-top: 20px;
+  background-color: #fff; /* White for questions background */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.questions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.questions li {
+  margin: 5px 0;
+}
+
 /* Center and Array CSS */
 .center {
   margin: 20px auto;
