@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --primary-color: #101010; /* Dark background for primary elements */
+  --secondary-color: #242635; /* Slightly lighter background for secondary elements */
+  --accent-color: #ff6347; /* Tomato color for accents */
+  --highlight-color: #4CAF50; /* Green for highlighting */
+  --cell-background: #ddd; /* Default background for cells */
+}
+
+/* Reset and Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  scroll-behavior: smooth;
+  text-decoration: none;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(135deg, var(--primary-color) 30%, var(--secondary-color) 100%);
+  color: #f0f0f0;
+}
+
+/* Title CSS */
+.title {
+  background-color: var(--primary-color);
+  font-size: 1.5em;
+  padding-block: 1em;
+  color: var(--accent-color);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Navbar CSS */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  font-size: 18px;
+  min-height: 70px;
+  padding-block: 1em;
+  background-color: var(--secondary-color);
+  transition: all 0.5s ease;
+}
+
+.navbar a {
+  color: #f0f0f0;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  background-color: var(--accent-color);
+}
+
+.navbar a:hover {
+  background-color: var(--highlight-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Center and Array CSS */
+.center {
+  margin: 20px auto;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+  height: 420px;
+  width: 410px;
+  max-height: 731px;
+  border-radius: 8px;
+}
+
+.array {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  padding: 1rem;
+  flex-direction: row;
+  background: #ede6ea; /* Light background for the array */
+  border-radius: 8px;
+}
+
+.cell {
+  display: flex;
+  align-items: flex-end;
+  flex: 0.5; /* Flex-grow property for responsive sizing */
+  width: 0.000001%; /* Allows flexible resizing */
+  margin: 1px;
+  background-color: var(--cell-background);
+  transition: all 0.4s ease-in-out;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cell.done {
+  background-color: #90ee90; /* Light green for sorted cells */
+}
+
+.cell.current {
+  background-color: #ff4500; /* Orange for the current cell being processed */
+}
+
+.cell.min {
+  background-color: #1e90ff; /* Blue for the minimum cell during sorting */
+}
+
+/* Input Box */
+.inputBox {
+  border: 2px solid #444;
+  border-radius: 6px;
+  width: 20vw; /* Responsive width */
+  padding: 0.4em;
+  background-color: #fafafa;
+}
+
+/* Footer CSS */
+footer {
+  font-size: 18px;
+  padding: 1em;
+  color: #f0f0f0;
+  background-color: var(--secondary-color);
+  text-align: center;
+  font-weight: 700;
+}
+
+.footerr {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: #f0f0f0;
+}
+
+.footerr-text {
+  font-size: 1rem;
+}
+
+.social-media {
+  display: flex;
+  gap: 1em;
+}
+
+.footerr .social-media a {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.2rem solid var(--highlight-color);
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--highlight-color);
+  background-color: var(--secondary-color);
+}
+
+.social-media a:hover {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 1.2em;
+  }
+  .navbar a {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+  footer {
+    font-size: 16px;
+  }
+  .footerr .social-media a {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .center {
+    width: 95%;
+  }
+}
