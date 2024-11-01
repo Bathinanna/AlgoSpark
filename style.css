@@ -6,6 +6,8 @@
   --accent-color: #ff6347; /* Tomato color for accents */
   --highlight-color: #4CAF50; /* Green for highlighting */
   --cell-background: #ddd; /* Default background for cells */
+  --text-color: #f0f0f0; /* Default text color */
+  --border-color: #444; /* Border color for inputs */
 }
 
 /* Reset and Global Styles */
@@ -28,14 +30,14 @@ body {
   flex-direction: column;
   align-items: stretch;
   background: linear-gradient(135deg, var(--primary-color) 30%, var(--secondary-color) 100%);
-  color: #f0f0f0;
+  color: var(--text-color);
 }
 
 /* Title CSS */
 .title {
   background-color: var(--primary-color);
-  font-size: 1.5em;
-  padding-block: 1em;
+  font-size: 2em; /* Increased font size for prominence */
+  padding: 1em;
   color: var(--accent-color);
   cursor: pointer;
   text-transform: uppercase;
@@ -50,17 +52,18 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-  font-size: 18px;
+  font-size: 1.2em; /* Adjusted for better readability */
   min-height: 70px;
-  padding-block: 1em;
+  padding: 1em;
   background-color: var(--secondary-color);
   transition: all 0.5s ease;
+  border-radius: 8px; /* Added border radius for smoothness */
 }
 
 .navbar a {
-  color: #f0f0f0;
+  color: var(--text-color);
   font-weight: bold;
-  padding: 8px 14px;
+  padding: 10px 15px; /* Slightly larger padding */
   border-radius: 8px;
   transition: 0.3s ease-in-out;
   background-color: var(--accent-color);
@@ -92,6 +95,7 @@ body {
   border-radius: 8px;
 }
 
+/* Cell Styles */
 .cell {
   display: flex;
   align-items: flex-end;
@@ -118,21 +122,27 @@ body {
 
 /* Input Box */
 .inputBox {
-  border: 2px solid #444;
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   width: 20vw; /* Responsive width */
-  padding: 0.4em;
+  padding: 0.5em;
   background-color: #fafafa;
+  transition: border 0.3s ease;
+}
+
+.inputBox:focus {
+  border-color: var(--accent-color); /* Highlight border on focus */
 }
 
 /* Footer CSS */
 footer {
   font-size: 18px;
   padding: 1em;
-  color: #f0f0f0;
+  color: var(--text-color);
   background-color: var(--secondary-color);
   text-align: center;
   font-weight: 700;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px -4px 12px; /* Shadow for depth */
 }
 
 .footerr {
@@ -140,7 +150,7 @@ footer {
   justify-content: space-around;
   padding: 1rem;
   background: var(--primary-color);
-  color: #f0f0f0;
+  color: var(--text-color);
 }
 
 .footerr-text {
@@ -163,6 +173,7 @@ footer {
   align-items: center;
   color: var(--highlight-color);
   background-color: var(--secondary-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .social-media a:hover {
@@ -173,7 +184,7 @@ footer {
 /* Responsive Styles */
 @media screen and (max-width: 600px) {
   .title {
-    font-size: 1.2em;
+    font-size: 1.5em; /* Slightly smaller on mobile */
   }
   .navbar a {
     font-size: 14px;
@@ -191,6 +202,6 @@ footer {
 
 @media screen and (max-width: 550px) {
   .center {
-    width: 95%;
+    width: 95%; /* Full width on smaller screens */
   }
 }
