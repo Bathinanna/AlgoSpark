@@ -8,6 +8,7 @@
   --cell-background: #ddd; /* Default background for cells */
   --text-color: #f0f0f0; /* Default text color */
   --border-color: #444; /* Border color for inputs */
+  --cell-hover-color: #ffe0b2; /* Light color for cell hover effect */
 }
 
 /* Reset and Global Styles */
@@ -103,9 +104,13 @@ body {
   width: 0.000001%; /* Allows flexible resizing */
   margin: 1px;
   background-color: var(--cell-background);
-  transition: all 0.4s ease-in-out;
+  transition: transform 0.3s ease-in-out, background-color 0.4s ease-in-out;
   border-radius: 4px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cell:hover {
+  background-color: var(--cell-hover-color); /* Light color for cell hover */
 }
 
 .cell.done {
