@@ -1,52 +1,47 @@
 "use strict";
-
 class Helper {
-    constructor(speed, elements = []) {
-        this.delay = parseInt(400 / speed); // Set delay based on speed
-        this.elements = elements; // Array of elements to manipulate
+    constructor(time, list = []) {
+        this.time = parseInt(400/time);
+        this.list = list;
     }
 
-    // Mark a cell as "current" to highlight it during sorting
-    markCurrent = async (index) => {
-        this.elements[index].classList.add("current");
+    mark = async (index) => {
+        this.list[index].setAttribute("class", "cell current");
     }
 
-    // Mark a cell as "min" to indicate a potential minimum or key comparison
-    markSpecial = async (index) => {
-        this.elements[index].classList.add("min");
+    markSpl = async (index) => {
+        this.list[index].setAttribute("class", "cell min");
     }
 
-    // Unmark a cell to reset its style after comparisons or swaps
     unmark = async (index) => {
-        this.elements[index].className = "cell";
+        this.list[index].setAttribute("class", "cell");
     }
     
-    // Pause the process for the specified delay duration
-    pause = () => {
-        return new Promise(resolve => setTimeout(resolve, this.delay));
+    pause = async() => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, this.time);
+        });
     }
 
-    // Compare values of two cells, returning true if the first is greater than the second
     compare = async (index1, index2) => {
         await this.pause();
-        const value1 = Number(this.elements[index1].getAttribute("value"));
-        const value2 = Number(this.elements[index2].getAttribute("value"));
-        return value1 > value2;
+        let value1 = Number(this.list[index1].getAttribute("value"));
+        let value2 = Number(this.list[index2].getAttribute("value"));
+        if(value1 > value2) {
+            return true;
+        }
+        return false;
     }
 
-    // Swap values of two cells visually and in attribute
     swap = async (index1, index2) => {
         await this.pause();
-        const value1 = this.elements[index1].getAttribute("value");
-        const value2 = this.elements[index2].getAttribute("value");
-
-        this.updateCell(index1, value2);
-        this.updateCell(index2, value1);
+        let value1 = this.list[index1].getAttribute("value");
+        let value2 = this.list[index2].getAttribute("value");
+        this.list[index1].setAttribute("value", value2);
+        this.list[index1].style.height = `${3.8*value2}px`;
+        this.list[index2].setAttribute("value", value1);
+        this.list[index2].style.height = `${3.8*value1}px`;
     }
-
-    // Helper method to update a cell's value and height
-    updateCell = (index, newValue) => {
-        this.elements[index].setAttribute("value", newValue);
-        this.elements[index].style.height = ${3.8 * newValue}px;
-    }
-}
+};
