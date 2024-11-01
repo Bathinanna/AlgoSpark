@@ -77,27 +77,27 @@
     <input type="text" id="inputArr" name="inputArr" class="inputBox" style="color: black;"><br><br>
   </div>
 
-  <!-- Practice Questions Section -->
-  <div class="practice-questions">
-    <h3>Practice Questions</h3>
-    <div class="platforms">
-      <div class="platform" onclick="showQuestions('leetcode')">
-        <i class="bx bxl-leetcode"></i>
-        <p>LeetCode</p>
-      </div>
-      <div class="platform" onclick="showQuestions('hackerrank')">
-        <i class="bx bxl-hackerrank"></i>
-        <p>HackerRank</p>
-      </div>
-      <div class="platform" onclick="showQuestions('geeksforgeeks')">
-        <i class="bx bxl-geeksforgeeks"></i>
-        <p>GeeksforGeeks</p>
-      </div>
+<div class="platforms">
+    <div class="platform leetcode">
+        <a href="https://leetcode.com" target="_blank">
+            <img src="path/to/leetcode-icon.png" alt="LeetCode" class="icon" />
+            <span>LeetCode</span>
+        </a>
     </div>
-    <div id="questions" class="questions" style="display: none;">
-      <ul id="questionList"></ul>
+    <div class="platform hackerrank">
+        <a href="https://www.hackerrank.com" target="_blank">
+            <img src="path/to/hackerrank-icon.png" alt="HackerRank" class="icon" />
+            <span>HackerRank</span>
+        </a>
     </div>
-  </div>
+    <div class="platform geeksforgeeks">
+        <a href="https://www.geeksforgeeks.org" target="_blank">
+            <img src="path/to/geeksforgeeks-icon.png" alt="GeeksforGeeks" class="icon" />
+            <span>GeeksforGeeks</span>
+        </a>
+    </div>
+</div>
+
 
   <!-- Footer showing time complexity and total execution time -->
   <footer class="footer">
